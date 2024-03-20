@@ -3,6 +3,9 @@
 ## Description:
 The Weather Forecast Web App is a user-friendly online tool designed to provide accurate and up-to-date weather information for any city of the user's choosing. Developed using HTML, CSS, and JavaScript/JQuery, with the assistance of the Day.js library for date manipulation, this web application offers a seamless experience for users to stay informed about the weather conditions in their desired locations.
 
+https://github.com/irtiza-S/weather-dashboard/blob/main/assets/img/weather-dashboard-video-demo-ezgif.com-video-to-gif-converter.gif
+
+
 ## Key Features:
 
 - User-Friendly Interface: The app features a clean and intuitive user interface, making it easy for users to navigate and interact with the weather data.
