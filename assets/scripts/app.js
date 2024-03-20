@@ -64,12 +64,25 @@ $(document).ready(function() {
         $('#forecast').html(forecastHTML);
     }
     
+
+    // Function to add searched city to history
+    function addToHistory(city) {
+        $('#history').append(`<a href="#" class="list-group-item list-group-item-action">${city}</a>`);
+    }
+
     // Event listener for form submission
     $('#search-form').submit(function(event) {
-        event.preventDefault();
-        const city = $('#search-input').val();
-        fetchWeather(city);
+        event.preventDefault()
+        const city = $('#search-input').val()
+        fetchWeather(city)
+        addToHistory(city)
+    });
 
+    // Event listener for click on search history
+    $('#history').on('click', 'a', function(event) {
+        event.preventDefault();
+        const city = $(this).text();
+        fetchWeather(city);
     });
 
    
