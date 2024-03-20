@@ -1,0 +1,13 @@
+
+
+#search-button {
+    width: 100%;
+    border: 1px solid black;
+
+}
+
+
+.gradient-bg {
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+}
+
