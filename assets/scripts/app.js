@@ -55,7 +55,7 @@ $(document).ready(function() {
                 <div class="col">
                     <p>Date: ${dt_txt}</p>
                     <img src="${iconUrl}" alt="Weather Icon">
-                    <p>Temperature: ${main.temperature}°C</p>
+                    <p>Temperature: ${main.temp}°C</p>
                     <p>Humidity: ${main.humidity}%</p>
                 </div>
             `;
@@ -75,6 +75,22 @@ $(document).ready(function() {
         $('#history').append(`<a href="#" class="list-group-item list-group-item-action">${city}</a>`);
     }
 
+    function updateHistoryDisplayed(history) {
+        const historyContainer = $('#history')
+        historyContainer.empty() //clear existing div
+
+        // render updated search results in history pane
+        history.forEach(city => {
+            historyContainer.append(`<a href="#" class="list-group-item list-group-item-action">${city}</a>`)
+        })
+    }
+
+    //retrieve and render search history when page loads
+    function initHistoryLoad() {
+        const initHistory = JSON.parse(localStorage.getItem('searchHistory')) || []
+        updateHistoryDisplayed(initHistory)
+    }
+
     // Event listener for form submission
     $('#search-form').submit(function(event) {
         event.preventDefault()
@@ -89,5 +105,7 @@ $(document).ready(function() {
         const city = $(this).text();
         fetchWeather(city);
     });
+
+    initHistoryLoad()
 
 });
