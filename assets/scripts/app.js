@@ -1,12 +1,3 @@
-// const apiKey = '2c21a0893903fb1661f16debd471f221'
-// const longitude = ''
-// const latitude = ''
-// const url = `api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
-
-// async function fetchData(query) {
-
-// }
-
 $(document).ready(function() {
     // OpenWeatherMap API key
     const apiKey = '2c21a0893903fb1661f16debd471f221'; 
@@ -22,7 +13,15 @@ $(document).ready(function() {
                 displayCurrentWeather(data);
             })
             .catch(error => console.error('Error fetching current weather:', error));
-
+        
+        // Fetch 5-day forecast data
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+        fetch(forecastUrl)
+            .then(response => response.json())
+            .then(data => {
+                displayForecast(data);
+            })
+            .catch(error => console.error('Error fetching forecast:', error));
     }
 
     // Function to display current weather
@@ -43,6 +42,27 @@ $(document).ready(function() {
         $('#today').html(currentWeatherHTML);
     }
 
+    // Function to display 5-day forecast
+    function displayForecast(data) {
+        const forecastList = data.list.slice(0, 5); // Get only the first 5 forecasts
+        let forecastHTML = '<h2>5-Day Forecast</h2>';
+
+        forecastList.forEach(forecast => {
+            const { dt_txt, weather, main } = forecast;
+            const iconUrl = `http://openweathermap.org/img/w/${weather[0].icon}.png`;
+
+            forecastHTML += `
+                <div class="col">
+                    <p>Date: ${dt_txt}</p>
+                    <img src="${iconUrl}" alt="Weather Icon">
+                    <p>Temperature: ${main.temperature}°C</p>
+                    <p>Humidity: ${main.humidity}%</p>
+                </div>
+            `;
+        });
+
+        $('#forecast').html(forecastHTML);
+    }
     
     // Event listener for form submission
     $('#search-form').submit(function(event) {
