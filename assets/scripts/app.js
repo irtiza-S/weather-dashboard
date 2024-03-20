@@ -67,6 +67,11 @@ $(document).ready(function() {
 
     // Function to add searched city to history
     function addToHistory(city) {
+        let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || []
+        searchHistory.push(city)
+        searchHistory = Array.from(new Set(searchHistory)) //remove duplicates
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory)) //store updated data
+
         $('#history').append(`<a href="#" class="list-group-item list-group-item-action">${city}</a>`);
     }
 
@@ -85,6 +90,4 @@ $(document).ready(function() {
         fetchWeather(city);
     });
 
-   
-   
 });
